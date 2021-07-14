@@ -4,7 +4,7 @@ pipeline{
     stages{
         stage('git Checkout'){
             steps{  
-                    checkout changelog: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hackathonpod/gameoflife.git']]]
+                    checkout changelog: false, scm: [$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hackathonpod/gameoflife.git']]]
                 }
             }
         stage('build'){
