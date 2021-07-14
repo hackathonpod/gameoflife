@@ -32,3 +32,4 @@ pipeline{
                     cloudBeesFlowTriggerRelease configuration: 'cd-configuration', parameters: '{"release":{"releaseName":"POD1_HACK_release1.1 Copy","stages":[{"stageName":"Dev","stageValue":false},{"stageName":"Prod","stageValue":false},{"stageName":"QA","stageValue":true}],"parameters":[{"parameterName":"input_param","parameterValue":""}]}}', projectName: 'hvora', releaseName: 'POD1_HACK_release1.1 Copy', startingStage: ''            }
     }
 }
+}
