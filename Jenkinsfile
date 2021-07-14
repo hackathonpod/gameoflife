@@ -9,7 +9,7 @@ pipeline{
         stage('build'){
                 steps{
                     withMaven(jdk: 'jdk', maven: 'Maven') {
-                        sh "mvn clean package -DskipTests=false"
+                        sh "mvn clean package -DskipTests=true"
                     }
                     }
                 }
