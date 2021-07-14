@@ -2,18 +2,19 @@ pipeline{
     agent any
     stages{
         stage('git Checkout'){
-            step{  
+            steps{  
                     checkout changelog: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hackathonpod/gameoflife.git']]]
                 }
             }
         stage('build'){
-                step{
+                steps{
                     withMaven(jdk: 'jdk', maven: 'Maven') {
                         sh "mvn clean package"
                     }
+                    }
                 }
         stage('DockerImage'){
-            step{  
+            steps{  
                 sh """cat << EOF > Dockerfile
                         FROM tomcat:8-jre11
                         RUN rm -rf /usr/local/tomcat/webapps/*
@@ -27,10 +28,7 @@ pipeline{
                     }
             }   
             stage('CB TriggerRelease'){
-            step{  
-                    cloudBeesFlowTriggerRelease configuration: 'cd-configuration', parameters: '{"release":{"releaseName":"POD1_HACK_release1.1 Copy","stages":[{"stageName":"Dev","stageValue":false},{"stageName":"Prod","stageValue":false},{"stageName":"QA","stageValue":true}],"parameters":[{"parameterName":"input_param","parameterValue":""}]}}', projectName: 'hvora', releaseName: 'POD1_HACK_release1.1 Copy', startingStage: 'QA'                }
-            }
-            }
-        
+            steps{  
+                    cloudBeesFlowTriggerRelease configuration: 'cd-configuration', parameters: '{"release":{"releaseName":"POD1_HACK_release1.1 Copy","stages":[{"stageName":"Dev","stageValue":false},{"stageName":"Prod","stageValue":false},{"stageName":"QA","stageValue":true}],"parameters":[{"parameterName":"input_param","parameterValue":""}]}}', projectName: 'hvora', releaseName: 'POD1_HACK_release1.1 Copy', startingStage: ''            }
     }
 }
