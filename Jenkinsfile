@@ -30,7 +30,7 @@ pipeline{
             }   
             stage('CB TriggerRelease'){
             steps{  
-                cloudBeesFlowTriggerRelease configuration: 'cd-configuration', parameters: '{"release":{"releaseName":"POD1_HACK_release1.0","stages":[{"stageName":"Dev","stageValue":true},{"stageName":"Prod","stageValue":false},{"stageName":"Test","stageValue":false}],"parameters":[{"parameterName":"input_param","parameterValue":"${branchName}"}]}}', projectName: 'hvora', releaseName: 'POD1_HACK_release1.0', startingStage: ''        
+                cloudBeesFlowTriggerRelease configuration: 'cd-configuration', parameters: '{"release":{"releaseName":"POD1_HACK_release1.1 Copy","stages":[{"stageName":"Dev","stageValue":true},{"stageName":"Prod","stageValue":false},{"stageName":"QA","stageValue":false}],"parameters":[{"parameterName":"input_param","parameterValue":"${branchName}"}]}}', projectName: 'hvora', releaseName: 'POD1_HACK_release1.1 Copy', startingStage: ''        
             }
     }
 }
