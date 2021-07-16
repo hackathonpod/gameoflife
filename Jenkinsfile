@@ -6,6 +6,8 @@ pipeline{
                     checkout changelog: false, scm: [$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hackathonpod/gameoflife.git']]]
                 }
             }
+        
+        
         stage('build'){
                 steps{
                     withMaven(jdk: 'jdk', maven: 'Maven') {
