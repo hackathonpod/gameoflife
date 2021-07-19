@@ -27,22 +27,24 @@ pipeline{
                         docker push hackathonpod2/gameoflife """        
                     }
             }   
-            stage('CB TriggerRelease'){
-            steps{
-                script{
-                    def branch_nem = scm.branches[0].name
+        
+        def branchFunc(){
+        def branch_nem = scm.branches[0].name
                     if (branch_nem.contains("*/")) {
                     branch_nem = branch_nem.split("\\*/")[1]
                     }
-                    //echo branch_nem
-                    
-                    when { expression { branch_nem == "release-*/"} }{
+        }
+            stage('CB TriggerRelease'){
+            steps{
+                script{
+                    branchFunc()
+                    if(branch_nem == "release-*/"){
                 cloudBeesFlowTriggerRelease configuration: 'cd-configuration', parameters: '{"release":{"releaseName":"POD1_HACK_release1.1 Copy","stages":[{"stageName":"Dev","stageValue":false},{"stageName":"Prod","stageValue":false},{"stageName":"QA","stageValue":true}],"parameters":[{"parameterName":"ProjectKey","parameterValue":"POD2"},{"parameterName":"ProjectName","parameterValue":"POD2"},{"parameterName":"ProjectVersion","parameterValue":"1.0.0"},{"parameterName":"input_param","parameterValue":""},{"parameterName":"BranchName","parameterValue":"release-*/"}]}}', projectName: 'hvora', releaseName: 'POD1_HACK_release1.1 Copy', startingStage: '' 
                     }
-                    when { expression { branch_nem == "develop"} }{
+                    else if(branch_nem == "develop"){
                         cloudBeesFlowTriggerRelease configuration: 'cd-configuration', parameters: '{"release":{"releaseName":"POD1_HACK_release1.1 Copy","stages":[{"stageName":"Dev","stageValue":true},{"stageName":"Prod","stageValue":false},{"stageName":"QA","stageValue":false}],"parameters":[{"parameterName":"ProjectKey","parameterValue":"POD2"},{"parameterName":"ProjectName","parameterValue":"POD2"},{"parameterName":"ProjectVersion","parameterValue":"1.0.0"},{"parameterName":"input_param","parameterValue":""},{"parameterName":"BranchName","parameterValue":"develop"}]}}', projectName: 'hvora', releaseName: 'POD1_HACK_release1.1 Copy', startingStage: ''    
                     }
-                    when { expression { branch_nem == "master"} }{
+                    else if(branch_nem == "master"){
                         cloudBeesFlowTriggerRelease configuration: 'cd-configuration', parameters: '{"release":{"releaseName":"POD1_HACK_release1.1 Copy","stages":[{"stageName":"Dev","stageValue":true},{"stageName":"Prod","stageValue":false},{"stageName":"QA","stageValue":false}],"parameters":[{"parameterName":"ProjectKey","parameterValue":"POD2"},{"parameterName":"ProjectName","parameterValue":"POD2"},{"parameterName":"ProjectVersion","parameterValue":"1.0.0"},{"parameterName":"input_param","parameterValue":""},{"parameterName":"BranchName","parameterValue":"master"}]}}', projectName: 'hvora', releaseName: 'POD1_HACK_release1.1 Copy', startingStage: ''
                     }
                 }
