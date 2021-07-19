@@ -12,9 +12,7 @@ pipeline{
                         sh "mvn clean package -DskipTests=true"
                     }
                     }
-                }
-        
-        
+                }        
         stage('DockerImage'){
             steps{  
                 sh """cat << EOF > Dockerfile
