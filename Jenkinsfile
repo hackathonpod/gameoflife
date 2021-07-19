@@ -13,8 +13,6 @@ pipeline{
                     }
                     }
                 }
-        
-        
         stage('DockerImage'){
             steps{  
                 sh """cat << EOF > Dockerfile
