@@ -1,11 +1,11 @@
 pipeline{
     agent any
     stages{
-        //stage('git Checkout'){
-            //steps{  
-                    //checkout changelog: false, scm: [$class: 'GitSCM', branches: [[name: '*/release-1.0']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hackathonpod/gameoflife.git']]]
-                //}
-            //}
+        stage('git Checkout'){
+            steps{  
+                    checkout changelog: false, scm: [$class: 'GitSCM', branches: [[name: '*/release-1.0']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hackathonpod/gameoflife.git']]]
+                }
+            }
         stage('build'){
                 steps{
                     withMaven(jdk: 'jdk', maven: 'Maven') {
