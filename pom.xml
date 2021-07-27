@@ -23,11 +23,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>nexus-snapshot</id>
-            <url>http://204.236.173.63:8081/nexus/content/repositories/snapshots</url>
+            <url>http://54.215.202.166:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
             <id>nexus-release</id>
-            <url>http://204.236.173.63:8081/nexus/content/repositories/releases</url>
+            <url>http://54.215.202.166:8081/nexus/content/repositories/releases</url>
         </repository>
     </distributionManagement>
            
